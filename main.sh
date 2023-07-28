@@ -527,7 +527,7 @@ downloadApp() {
 }
 
 downloadMicrog() {
-    microgName=mMicroG microgRepo=cuynu
+    microgName=mMicroG microgRepo=inotia00
     if "${header[@]}" --begin 2 0 --title '| MicroG Prompt |' --no-items --defaultno --yesno "$microgName is used to run MicroG services without root.\nYouTube and YouTube Music won't work without it.\nIf you already have $microgName, You don't need to download it.\n\n\n\n\n\nDo you want to download $microgName app?" -1 -1; then
         internet || return 1
         readarray -t microgheaders < <(curl -s "https://api.github.com/repos/$microgRepo/$microgName/releases/latest" | jq -r --arg regex ".*$arch.*" '(.assets[] | if .name | test($regex) then .browser_download_url, .size else empty end), .tag_name')
